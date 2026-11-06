@@ -35,10 +35,10 @@ const createBigPictureRenderer = (bigPicture) => {
 
   const renderComments = () => {
     const nextCommentsShown = Math.min(commentsShown + COMMENTS_PORTION, currentPhoto.comments.length);
-    const commentsSlice = currentPhoto.comments.slice(commentsShown, nextCommentsShown);
+    const displayedComments = currentPhoto.comments.slice(commentsShown, nextCommentsShown);
 
     const fragment = document.createDocumentFragment();
-    commentsSlice.forEach((comment) => {
+    displayedComments.forEach((comment) => {
       const commentElement = createCommentElement(comment);
       fragment.append(commentElement);
     });
@@ -68,6 +68,5 @@ const createBigPictureRenderer = (bigPicture) => {
     renderComments();
   };
 };
-
 
 export { createBigPictureRenderer };

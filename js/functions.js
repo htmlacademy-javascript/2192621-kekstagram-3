@@ -20,7 +20,7 @@ const extractNumber = (value) => {
   for (let i = 0; i < string.length; i++) {
     const character = string[i];
     const parsed = parseInt(character, 10);
-    if (Number.isNaN(parsed) === false) {
+    if (!Number.isNaN(parsed)) {
       result += character;
     }
   }

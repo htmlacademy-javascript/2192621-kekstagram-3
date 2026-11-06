@@ -36,7 +36,7 @@ const EFFECTS = {
     max: 3,
     step: 0.1,
     unit: ''
-  },
+  }
 };
 
 const effectLevelSlider = document.querySelector('.effect-level__slider');

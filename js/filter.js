@@ -8,14 +8,14 @@ const Filter = {
 };
 
 const getRandomPhotos = (photos) => {
-  const copiedArray = photos.slice();
-  const count = Math.min(RANDOM_PHOTOS_COUNT, copiedArray.length);
+  const randomPhotos = photos.slice();
+  const count = Math.min(RANDOM_PHOTOS_COUNT, randomPhotos.length);
 
   for (let i = 0; i < count; i++) {
-    const randomIndex = getRandomInteger(i, copiedArray.length - 1);
-    [copiedArray[i], copiedArray[randomIndex]] = [copiedArray[randomIndex], copiedArray[i]];
+    const randomIndex = getRandomInteger(i, randomPhotos.length - 1);
+    [randomPhotos[i], randomPhotos[randomIndex]] = [randomPhotos[randomIndex], randomPhotos[i]];
   }
-  return copiedArray.slice(0, count);
+  return randomPhotos.slice(0, count);
 };
 
 const compareComments = (photoA, photoB) => {

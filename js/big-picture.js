@@ -14,11 +14,11 @@ const openBigPicture = (photo) => {
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
-function closeBigPicture() {
+const closeBigPicture = () => {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
-}
+};
 
 function onDocumentKeydown(evt) {
   if (isEscapeKey(evt)) {

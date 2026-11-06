@@ -18,6 +18,7 @@ const debouncedRerender = debounce((photos, id) => {
 
 const initFilters = (photos) => {
   filtersContainer.classList.remove('img-filters--inactive');
+  let activeFilterButton = document.querySelector('.img-filters__button--active');
 
   filtersForm.addEventListener('click', (evt) => {
     const targetButton = evt.target;
@@ -26,14 +27,13 @@ const initFilters = (photos) => {
       return;
     }
 
-    if (targetButton.classList.contains('img-filters__button--active')) {
+    if (targetButton === activeFilterButton) {
       return;
     }
 
-    const activeButton = filtersForm.querySelector('.img-filters__button--active');
-    activeButton.classList.remove('img-filters__button--active');
+    activeFilterButton.classList.remove('img-filters__button--active');
     targetButton.classList.add('img-filters__button--active');
-
+    activeFilterButton = targetButton;
     debouncedRerender(photos, targetButton.id);
   });
 };
