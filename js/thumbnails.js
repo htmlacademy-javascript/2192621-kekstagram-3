@@ -1,35 +1,35 @@
 import { openBigPicture } from './big-picture.js';
 
-const pictureTemplate = document.querySelector('#picture').content;
-const picturesContainer = document.querySelector('.pictures');
+const pictureTemplateFragment = document.querySelector('#picture').content;
+const picturesContainerElement = document.querySelector('.pictures');
 let cachedPhotos = [];
 
 const createThumbnail = (photo) => {
-  const pictureClone = pictureTemplate.cloneNode(true);
-  const image = pictureClone.querySelector('.picture__img');
-  const pictureLikes = pictureClone.querySelector('.picture__likes');
-  const pictureComments = pictureClone.querySelector('.picture__comments');
-  const pictureElement = pictureClone.querySelector('.picture');
-  image.src = photo.url;
-  image.alt = photo.description;
-  pictureLikes.textContent = photo.likes;
-  pictureComments.textContent = photo.comments.length;
+  const pictureCloneFragment = pictureTemplateFragment.cloneNode(true);
+  const pictureImageElement = pictureCloneFragment.querySelector('.picture__img');
+  const pictureLikesElement = pictureCloneFragment.querySelector('.picture__likes');
+  const pictureCommentsElement = pictureCloneFragment.querySelector('.picture__comments');
+  const pictureElement = pictureCloneFragment.querySelector('.picture');
+  pictureImageElement.src = photo.url;
+  pictureImageElement.alt = photo.description;
+  pictureLikesElement.textContent = photo.likes;
+  pictureCommentsElement.textContent = photo.comments.length;
   pictureElement.dataset.photoId = photo.id;
 
-  return pictureClone;
+  return pictureCloneFragment;
 };
 
 const renderThumbnails = (photos) => {
-  const pictures = picturesContainer.querySelectorAll('.picture');
-  const fragment = document.createDocumentFragment();
-  pictures.forEach((picture) => picture.remove());
+  const pictureElements = picturesContainerElement.querySelectorAll('.picture');
+  const picturesFragment = document.createDocumentFragment();
+  pictureElements.forEach((pictureElement) => pictureElement.remove());
   cachedPhotos = photos;
 
   photos.forEach((photo) => {
-    fragment.append(createThumbnail(photo));
+    picturesFragment.append(createThumbnail(photo));
   });
 
-  picturesContainer.append(fragment);
+  picturesContainerElement.append(picturesFragment);
 };
 
 const onPicturesContainerClick = (evt) => {
@@ -45,6 +45,6 @@ const onPicturesContainerClick = (evt) => {
   openBigPicture(currentPhoto);
 };
 
-picturesContainer.addEventListener('click', onPicturesContainerClick);
+picturesContainerElement.addEventListener('click', onPicturesContainerClick);
 
 export { renderThumbnails };

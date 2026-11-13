@@ -15,33 +15,33 @@ const SubmitButtonText = {
   SENDING: 'Публикую...'
 };
 
-const uploadForm = document.querySelector('.img-upload__form');
-const uploadOverlay = document.querySelector('.img-upload__overlay');
-const uploadCancel = document.querySelector('.img-upload__cancel');
+const uploadFormElement = document.querySelector('.img-upload__form');
+const uploadOverlayElement = document.querySelector('.img-upload__overlay');
+const uploadCancelElement = document.querySelector('.img-upload__cancel');
 
-const textHashtags = document.querySelector('.text__hashtags');
-const textDescription = document.querySelector('.text__description');
+const textHashtagsElement = document.querySelector('.text__hashtags');
+const textDescriptionElement = document.querySelector('.text__description');
 
-const submitButton = document.querySelector('.img-upload__submit');
+const submitButtonElement = document.querySelector('.img-upload__submit');
 
-const pristine = new Pristine(uploadForm, {
+const pristine = new Pristine(uploadFormElement, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
   errorTextClass: 'img-upload__field-wrapper--error'
 });
 
 const openUploadForm = () => {
-  uploadOverlay.classList.remove('hidden');
+  uploadOverlayElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
 const closeUploadForm = () => {
-  uploadOverlay.classList.add('hidden');
+  uploadOverlayElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
-  uploadForm.reset();
+  uploadFormElement.reset();
   pristine.reset();
   resetScale();
   resetEffects();
@@ -57,10 +57,10 @@ function onDocumentKeydown(evt) {
 
 setupUploadPreview(openUploadForm);
 
-uploadCancel.addEventListener('click', closeUploadForm);
+uploadCancelElement.addEventListener('click', closeUploadForm);
 
-uploadForm.addEventListener('keydown', (evt) => {
-  if (isEscapeKey(evt) && (evt.target === textHashtags || evt.target === textDescription)) {
+uploadFormElement.addEventListener('keydown', (evt) => {
+  if (isEscapeKey(evt) && (evt.target === textHashtagsElement || evt.target === textDescriptionElement)) {
     evt.stopPropagation();
   }
 });
@@ -89,22 +89,22 @@ const validateHashtagUnique = (value) => {
 
 const validationRules = [
   {
-    element: textDescription,
+    element: textDescriptionElement,
     validator: validateCommentLength,
     errorMessage: `длина комментария не может составлять больше ${MAX_COMMENT_LENGTH} символов`
   },
   {
-    element: textHashtags,
+    element: textHashtagsElement,
     validator: validateHashtagCount,
     errorMessage: `нельзя указать больше ${MAX_HASHTAG_COUNT} хэштегов`
   },
   {
-    element: textHashtags,
+    element: textHashtagsElement,
     validator: validateHashtagSymbols,
     errorMessage: `хэштег должен начинаться с #, состоять из букв и чисел и содержать от ${MIN_HASHTAG_LENGTH} до ${MAX_HASHTAG_LENGTH} символов`
   },
   {
-    element: textHashtags,
+    element: textHashtagsElement,
     validator: validateHashtagUnique,
     errorMessage: 'хэштеги не должны повторяться'
   }
@@ -119,11 +119,11 @@ validationRules.forEach((rule) => {
 });
 
 const toggleSubmitButton = (isBlocked) => {
-  submitButton.disabled = isBlocked;
-  submitButton.textContent = isBlocked ? SubmitButtonText.SENDING : SubmitButtonText.IDLE;
+  submitButtonElement.disabled = isBlocked;
+  submitButtonElement.textContent = isBlocked ? SubmitButtonText.SENDING : SubmitButtonText.IDLE;
 };
 
-uploadForm.addEventListener('submit', (evt) => {
+uploadFormElement.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const isValid = pristine.validate();
   if (!isValid) {

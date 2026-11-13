@@ -2,13 +2,20 @@ import { isEscapeKey } from './util.js';
 
 const ALERT_SHOW_TIME = 5000;
 
-const showMessage = (templateSelector) => {
-  const template = document.querySelector(templateSelector).content;
-  const templateClone = template.cloneNode(true);
-  const messageElement = templateClone.firstElementChild;
+const createMessageElement = (templateSelector) => {
+  const templateFragment = document.querySelector(templateSelector).content;
+  const templateCloneFragment = templateFragment.cloneNode(true);
+  const messageElement = templateCloneFragment.firstElementChild;
+
   document.body.append(messageElement);
 
-  const closeButton = messageElement.querySelector('.success__button, .error__button');
+  return messageElement;
+};
+
+const showMessage = (templateSelector) => {
+  const messageElement = createMessageElement(templateSelector);
+
+  const closeButtonElement = messageElement.querySelector('.success__button, .error__button');
 
   const closeMessage = () => {
     messageElement.remove();
@@ -30,17 +37,15 @@ const showMessage = (templateSelector) => {
     }
   }
 
-  closeButton.addEventListener('click', closeMessage);
+  closeButtonElement.addEventListener('click', closeMessage);
 
   document.addEventListener('keydown', onDocumentKeydown, { capture: true });
   messageElement.addEventListener('click', onMessageClick);
 };
 
 const showDataError = () => {
-  const errorTemplate = document.querySelector('#data-error').content;
-  const errorClone = errorTemplate.cloneNode(true);
-  const errorElement = errorClone.firstElementChild;
-  document.body.append(errorElement);
+  const errorElement = createMessageElement('#data-error');
+
   setTimeout(() => {
     errorElement.remove();
   }, ALERT_SHOW_TIME);

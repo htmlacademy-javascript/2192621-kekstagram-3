@@ -1,9 +1,9 @@
 const FILE_TYPES = ['image/jpeg', 'image/png'];
 const DEFAULT_PREVIEW = 'img/upload-default-image.jpg';
 
-const uploadInput = document.querySelector('.img-upload__input');
-const previewImg = document.querySelector('.img-upload__preview img');
-const effectsPreviews = document.querySelectorAll('.effects__preview');
+const uploadInputElement = document.querySelector('.img-upload__input');
+const previewImgElement = document.querySelector('.img-upload__preview img');
+const effectsPreviewsElements = document.querySelectorAll('.effects__preview');
 
 let currentFileUrl = null;
 
@@ -15,21 +15,21 @@ const cleanUpFileUrl = () => {
 };
 
 const updateEffectsPreview = (url) => {
-  effectsPreviews.forEach((preview) => {
-    preview.style.backgroundImage = url ? `url('${url}')` : '';
+  effectsPreviewsElements.forEach((previewElement) => {
+    previewElement.style.backgroundImage = url ? `url('${url}')` : '';
   });
 };
 
 const resetPreview = () => {
   cleanUpFileUrl();
-  previewImg.src = DEFAULT_PREVIEW;
+  previewImgElement.src = DEFAULT_PREVIEW;
   updateEffectsPreview('');
-  uploadInput.value = '';
+  uploadInputElement.value = '';
 };
 
 const setupUploadPreview = (onSuccess) => {
-  uploadInput.addEventListener('change', () => {
-    const file = uploadInput.files[0];
+  uploadInputElement.addEventListener('change', () => {
+    const file = uploadInputElement.files[0];
     if (!file) {
       return;
     }
@@ -44,7 +44,7 @@ const setupUploadPreview = (onSuccess) => {
     cleanUpFileUrl();
 
     currentFileUrl = URL.createObjectURL(file);
-    previewImg.src = currentFileUrl;
+    previewImgElement.src = currentFileUrl;
 
     updateEffectsPreview(currentFileUrl);
 

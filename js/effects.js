@@ -1,36 +1,36 @@
-const EFFECTS = {
-  none: {
+const Effects = {
+  NONE: {
     style: 'none'
   },
-  chrome: {
+  CHROME: {
     style: 'grayscale',
     min: 0,
     max: 1,
     step: 0.1,
     unit: ''
   },
-  sepia: {
+  SEPIA: {
     style: 'sepia',
     min: 0,
     max: 1,
     step: 0.1,
     unit: ''
   },
-  marvin: {
+  MARVIN: {
     style: 'invert',
     min: 0,
     max: 100,
     step: 1,
     unit: '%'
   },
-  phobos: {
+  PHOBOS: {
     style: 'blur',
     min: 0,
     max: 3,
     step: 0.1,
     unit: 'px'
   },
-  heat: {
+  HEAT: {
     style: 'brightness',
     min: 1,
     max: 3,
@@ -39,15 +39,15 @@ const EFFECTS = {
   }
 };
 
-const effectLevelSlider = document.querySelector('.effect-level__slider');
-const effectLevelValue = document.querySelector('.effect-level__value');
-const previewImg = document.querySelector('.img-upload__preview img');
-const effectLevelContainer = document.querySelector('.img-upload__effect-level');
-const effectsList = document.querySelector('.effects__list');
+const effectLevelSliderElement = document.querySelector('.effect-level__slider');
+const effectLevelValueElement = document.querySelector('.effect-level__value');
+const previewImgElement = document.querySelector('.img-upload__preview img');
+const effectLevelContainerElement = document.querySelector('.img-upload__effect-level');
+const effectsListElement = document.querySelector('.effects__list');
 
-let chosenEffect = EFFECTS.none;
+let chosenEffect = Effects.NONE;
 
-noUiSlider.create(effectLevelSlider, {
+noUiSlider.create(effectLevelSliderElement, {
   range: {
     min: 0,
     max: 1
@@ -62,31 +62,31 @@ noUiSlider.create(effectLevelSlider, {
 });
 
 const applyDefaultEffect = () => {
-  previewImg.style.filter = 'none';
-  effectLevelValue.value = '';
-  effectLevelContainer.classList.add('hidden');
+  previewImgElement.style.filter = 'none';
+  effectLevelValueElement.value = '';
+  effectLevelContainerElement.classList.add('hidden');
 };
 
 applyDefaultEffect();
 
-effectLevelSlider.noUiSlider.on('update', () => {
-  const value = effectLevelSlider.noUiSlider.get();
-  effectLevelValue.value = value;
-  previewImg.style.filter = `${chosenEffect.style}(${value}${chosenEffect.unit})`;
+effectLevelSliderElement.noUiSlider.on('update', () => {
+  const value = effectLevelSliderElement.noUiSlider.get();
+  effectLevelValueElement.value = value;
+  previewImgElement.style.filter = `${chosenEffect.style}(${value}${chosenEffect.unit})`;
 });
 
-effectsList.addEventListener('change', (evt) => {
-  const effectName = evt.target.value;
-  chosenEffect = EFFECTS[effectName];
+effectsListElement.addEventListener('change', (evt) => {
+  const effectName = evt.target.value.toUpperCase();
+  chosenEffect = Effects[effectName];
 
-  if (chosenEffect === EFFECTS.none) {
+  if (chosenEffect === Effects.NONE) {
     applyDefaultEffect();
     return;
   }
 
-  effectLevelContainer.classList.remove('hidden');
+  effectLevelContainerElement.classList.remove('hidden');
 
-  effectLevelSlider.noUiSlider.updateOptions({
+  effectLevelSliderElement.noUiSlider.updateOptions({
     range: {
       min: chosenEffect.min,
       max: chosenEffect.max
@@ -97,7 +97,7 @@ effectsList.addEventListener('change', (evt) => {
 });
 
 const resetEffects = () => {
-  chosenEffect = EFFECTS.none;
+  chosenEffect = Effects.NONE;
   applyDefaultEffect();
 };
 

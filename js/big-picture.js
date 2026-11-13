@@ -1,12 +1,12 @@
 import { createBigPictureRenderer } from './big-picture-render.js';
 import { isEscapeKey } from './util.js';
 
-const bigPicture = document.querySelector('.big-picture');
-const buttonClose = bigPicture.querySelector('#picture-cancel');
-const renderBigPicture = createBigPictureRenderer(bigPicture);
+const bigPictureElement = document.querySelector('.big-picture');
+const buttonCloseElement = bigPictureElement.querySelector('#picture-cancel');
+const renderBigPicture = createBigPictureRenderer(bigPictureElement);
 
 const openBigPicture = (photo) => {
-  bigPicture.classList.remove('hidden');
+  bigPictureElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
   renderBigPicture(photo);
@@ -15,7 +15,7 @@ const openBigPicture = (photo) => {
 };
 
 const closeBigPicture = () => {
-  bigPicture.classList.add('hidden');
+  bigPictureElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
 };
@@ -27,6 +27,6 @@ function onDocumentKeydown(evt) {
   }
 }
 
-buttonClose.addEventListener('click', closeBigPicture);
+buttonCloseElement.addEventListener('click', closeBigPicture);
 
 export { openBigPicture };
