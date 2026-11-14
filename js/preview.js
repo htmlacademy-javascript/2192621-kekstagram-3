@@ -3,7 +3,7 @@ const DEFAULT_PREVIEW = 'img/upload-default-image.jpg';
 
 const uploadInputElement = document.querySelector('.img-upload__input');
 const previewImgElement = document.querySelector('.img-upload__preview img');
-const effectsPreviewsElements = document.querySelectorAll('.effects__preview');
+const effectPreviewElements = document.querySelectorAll('.effects__preview');
 
 let currentFileUrl = null;
 
@@ -15,7 +15,7 @@ const cleanUpFileUrl = () => {
 };
 
 const updateEffectsPreview = (url) => {
-  effectsPreviewsElements.forEach((previewElement) => {
+  effectPreviewElements.forEach((previewElement) => {
     previewElement.style.backgroundImage = url ? `url('${url}')` : '';
   });
 };

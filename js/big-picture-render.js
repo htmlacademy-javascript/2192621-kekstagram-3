@@ -21,14 +21,14 @@ const createCommentElement = (comment) => {
   return listItemElement;
 };
 
-const createBigPictureRenderer = (bigPicture) => {
-  const bigPictureImgElement = bigPicture.querySelector('.big-picture__img img');
-  const bigPictureLikesElement = bigPicture.querySelector('.likes-count');
-  const bigPictureSocialCommentsElement = bigPicture.querySelector('.social__comments');
-  const bigPictureDescriptionElement = bigPicture.querySelector('.social__caption');
-  const bigPictureCommentsCountElement = bigPicture.querySelector('.social__comment-total-count');
-  const commentsLoaderElement = bigPicture.querySelector('.comments-loader');
-  const commentShownCountElement = bigPicture.querySelector('.social__comment-shown-count');
+const createBigPictureRenderer = (bigPictureElement) => {
+  const bigPictureImgElement = bigPictureElement.querySelector('.big-picture__img img');
+  const bigPictureLikesElement = bigPictureElement.querySelector('.likes-count');
+  const bigPictureSocialCommentsElement = bigPictureElement.querySelector('.social__comments');
+  const bigPictureDescriptionElement = bigPictureElement.querySelector('.social__caption');
+  const bigPictureCommentsCountElement = bigPictureElement.querySelector('.social__comment-total-count');
+  const commentsLoaderElement = bigPictureElement.querySelector('.comments-loader');
+  const commentShownCountElement = bigPictureElement.querySelector('.social__comment-shown-count');
 
   let currentPhoto = null;
   let commentsShown = 0;
